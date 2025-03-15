@@ -30,6 +30,9 @@ def test_validate_date():
     assert get_news.validate_date("2024-17-01",TODAY) == False
     assert get_news.validate_date("2050-01-01",TODAY) == False
     assert get_news.validate_date("invalid-date",TODAY) == False
+    assert get_news.validate_date("20o4-03-02",TODAY) == False
+    assert get_news.validate_date("2O24-03-02",TODAY) == False
+    assert get_news.validate_date("2024-0$-02",TODAY) == False
     
 def test_date_restiction():
     TODAY = MOCK_TODAY()
