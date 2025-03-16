@@ -22,6 +22,11 @@ def get_news_sites(query,end_date):
         logging.error(e)
         exit(1)
 
+def get_urls(news_sites):
+    list_of_sites = [site["link"] for site in news_sites["items"] ]
+    return list_of_sites
+
+
 def save_news_sites(news_sites):
     current_dir = Path("./")
     file_path = current_dir / "tmp"

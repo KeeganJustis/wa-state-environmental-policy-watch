@@ -3,6 +3,7 @@ import sys
 sys.path.insert(0, '/Users/keeganjustis/Documents/open-source/wa-state-environmental-policy-watch')
 from src import get_news
 from datetime import datetime,date
+import requests_mock
 
 
 def test_get_today():
