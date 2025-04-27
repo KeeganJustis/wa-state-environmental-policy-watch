@@ -19,6 +19,7 @@ if not os.environ.get("ANTHROPIC_API_KEY"):
 def get_news_content(url):
     try:
         loader = WebBaseLoader(url)
+        logging.info(f"Loading content from {url}")
         return list(loader.lazy_load())
     except requests.exceptions.InvalidSchema as e:
         logging.error(f"Error loading URL {url}: {e}")
@@ -31,6 +32,7 @@ def analyze_news_content(websites_content):
         prompt = ChatPromptTemplate.from_template("If blank put \"\", Otherwise write a concise summary of new laws in the legislature for the following:\\n\\n{context}")
         documents  = get_news_content(websites_content)
         chain = create_stuff_documents_chain(llm, prompt)
+        logging.info(f"analzing news content")
         result = chain.invoke({"context": documents})
         return result
     except Exception as e:
@@ -41,6 +43,7 @@ def analyze_news_content(websites_content):
 def analyze_all_summaries(list_of_summaries):
     summaries = [analyze_news_content(summary) for summary in list_of_summaries]
     all_summaries = ",".join(summaries)
+    logging.info(f"analzing all content")
     final_result = analyze_news_content(all_summaries)
     return final_result
     
