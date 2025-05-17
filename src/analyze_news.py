@@ -38,14 +38,18 @@ def analyze_news_content(websites_content):
     except Exception as e:
         logging.error(f"Error analyzing news content: {e}")
         return ""
-    # return websites_content.metadata['source'] , result
+
+
+
     
 def analyze_all_summaries(list_of_summaries):
     summaries = [analyze_news_content(summary) for summary in list_of_summaries]
-    all_summaries = ",".join(summaries)
-    logging.info(f"analzing all content")
-    final_result = analyze_news_content(all_summaries)
-    return final_result
+    final_sumary =""
+    for summary in range(len(summaries)):
+        final_sumary += f"<a href='{list_of_summaries[summary]}'> Story {summary + 1} </a> <br> <br>"
+        final_sumary += f"<p> {summaries[summary]} </p>" + "\n"
+    
+    return final_sumary
     
     
         
